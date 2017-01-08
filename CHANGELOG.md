@@ -11,3 +11,13 @@ No unit tests. Where to go next: Getters and Setters, tests, no front controller
 - Started with open source templates
 - Created classes
 - Front Controller is index.php
+
+## 1.0
+
+### Changed
+tictactoe webcomponent.
+
+### Added
+- tictactoe webcomponent
+- unit tests
+- simple php api

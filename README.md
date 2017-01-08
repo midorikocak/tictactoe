@@ -2,7 +2,7 @@
 > A tictactoe game implementation using PHP best practices.
 [![Build Status][travis-image]][travis-url]
 
-App description
+A tictactoe game implementation using PHP best practices.
 
 ## Installation
 
@@ -23,7 +23,7 @@ Now, follow these steps:
  
 ## Usage example
 
-App usage
+After installation go to index.html.
 
 ## Development setup
 
@@ -43,6 +43,8 @@ Refer to [CHANGELOG](https://github.com/midorikocak/tictactoe/CHANGELOG.md)
 Midori Kocak – [@midorikocak](https://twitter.com/midorikocak) – mtkocak@gmail.com
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
+
+[Live DEMO https://mynameismidori.com/tictactoe](https://mynameismidori.com/tictactoe)
 
 [https://github.com/midorikocak/tictactoe](https://github.com/midorikocak/tictactoe)
 

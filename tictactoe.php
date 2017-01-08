@@ -1,5 +1,7 @@
 <?php
+
 include('vendor/autoload.php');
+header('Access-Control-Allow-Origin: *');
 
 $tictactoe = new MidoriKocak\Tictactoe(3);
 
