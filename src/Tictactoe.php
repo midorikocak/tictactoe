@@ -306,9 +306,12 @@ class Tictactoe implements MoveInterface
             $this->nextMove = [];
             $this->message = "";
             $result = $this->checkWinning($playerUnit);
-            if(!$result){
+            if(!$result && !empty($this->nextMove)){
                 $this->board[$this->nextMove[1]][$this->nextMove[0]] = $this->nextMove[2];
                 $result = $this->checkWinning($playerUnit);
+            }
+            if(empty($this->nextMove)){
+                $this->message = "No one wins.";
             }
             return $this->nextMove;
         }
