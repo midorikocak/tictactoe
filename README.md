@@ -4,6 +4,8 @@
 
 A tictactoe game implementation using PHP best practices.
 
+!['screenshot'](https://raw.githubusercontent.com/midorikocak/tictactoe/master/screenshot.png)
+
 ## Installation
 
 After you go into the app directory, you should execute following commands.
