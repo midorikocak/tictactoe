@@ -4,6 +4,8 @@
 
 A tictactoe game implementation using PHP best practices.
 
+Needs PHP 7+
+
 !['screenshot'](https://raw.githubusercontent.com/midorikocak/tictactoe/master/screenshot.png)
 
 ## Installation
@@ -16,7 +18,7 @@ composer install
 ```
 
 For installation, we need to consider some topics:
- - Firstly, install PHP 7.1
+ - Firstly, install PHP 7.0 or 7.1
  - Secondly, install PHPUnit for testing proposes
  
 Now, follow these steps:
