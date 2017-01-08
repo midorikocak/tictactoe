@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>&lt;tictactoe-board&gt;</title>
+
+    <!-- Imports polyfill -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+    <!-- Imports custom element -->
+    <link rel="import" href="tictactoe-board.html">
+</head>
+
+<body>
+    <!-- Runs custom element -->
+    <tictactoe-board size="3"></tictactoe-board>
+    <script>
+        var boardData = [
+            ["X", "O", ""],
+            ["", "X", ""],
+            ["", "", "X"]
+        ];
+        document.querySelector('tictactoe-board').drawBoard(boardData);
+    </script>
+</body>
+
+</html>

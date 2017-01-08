@@ -1,0 +1,219 @@
+<!-- Defines element markup -->
+<template>
+    <style>
+    .tictactoe-board{
+        display: inline-flex;
+        flex-direction: column;
+    }
+    
+    .row {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .item{
+        flex: 0 0 150px;
+    }
+    
+    .circle {
+        width: 70px;
+        height: 70px;
+        border: 30px solid #666666;
+        border-radius: 50%;
+        margin: 10px;
+    }
+    
+    .cross {
+        width: 100px;
+        height: 100px;
+        margin: 25px;
+        position: relative;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        /* IE 9 */
+        -webkit-transform: rotate(45deg);
+        /* Safari and Chrome */
+        -webkit-transition-duration: 0.8s;
+        -moz-transition-duration: 0.8s;
+        -o-transition-duration: 0.8s;
+        transition-duration: 0.8s;
+    }
+    
+    .cross:before,
+    .cross:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: #666666;
+    }
+    
+    .cross:before {
+        left: 50%;
+        width: 30%;
+        margin-left: -15%;
+        height: 100%;
+    }
+    
+    .cross:after {
+        top: 50%;
+        height: 30%;
+        margin-top: -15%;
+        width: 100%;
+    }
+    
+    .item {
+        width: 150px;
+        height: 150px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .item > div[class=""] {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .item:not(:last-child) {
+        border-right: 5px solid #e4e4e4;
+    }
+
+    .row:not(:last-child) {
+        border-bottom: 5px solid #e4e4e4;
+    }
+</style>
+    <div class="tictactoe-board">
+    </div>
+
+</template>
+
+<script>
+    (function(window, document, undefined) {
+        // Refers to the "importer", which is index.html
+        var thatDoc = document;
+
+        // Refers to the "importee", which is src/hello-world.html
+        var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+        // Gets content from <template>
+        var template = thisDoc.querySelector('template').content;
+
+        // Creates an object based in the HTML Element prototype
+        var MyElementProto = Object.create(HTMLElement.prototype);
+
+        // Creates the "size" attribute and sets a default value
+        MyElementProto.size = '3';
+
+        MyElementProto.boardData = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+
+        MyElementProto.blockPlayer = false;
+
+        // Fires when an instance of the element is created
+        MyElementProto.createdCallback = function() {
+            // Creates the shadow root
+            var shadowRoot = this.createShadowRoot();
+
+            // Adds a template clone into shadow root
+            var clone = thatDoc.importNode(template, true);
+            shadowRoot.appendChild(clone);
+
+            // Caches <strong> DOM query
+            this.board = shadowRoot.querySelector('.tictactoe-board');
+
+            this.drawBoard(this.boardData);
+        };
+
+        MyElementProto.changeMessage = function(message) {
+            this.messageElement.textContent = message;
+        }
+
+
+        MyElementProto.drawBoard = function(boardData, blockPlayer) {
+            MyElementProto.blockPlayer = blockPlayer;
+
+            MyElementProto.boardData = boardData;
+            while (this.board.hasChildNodes()) {
+                this.board.removeChild(this.board.lastChild);
+            }
+
+            var size = boardData.length;
+
+            var circle = document.createElement('div');
+            circle.className = "circle";
+
+            var cross = document.createElement('div');
+            cross.className = "cross";
+
+            for (i = 0; i < size; i++) {
+
+                var row = document.createElement('div');
+                row.className = "row";
+                row.id = "row-" + i;
+                for (j = 0; j < size; j++) {
+                    var item = document.createElement('div');
+
+                    item.className = "item";
+                    item.id = "row-" + i + "-item-" + j;
+
+                    if (boardData[i][j] == "X") {
+                        item.appendChild(cross.cloneNode(true));
+                    } else if (boardData[i][j] == "O") {
+                        item.appendChild(circle.cloneNode(true));
+                    }
+
+                    item.addEventListener('click', function() {
+                        if (this.children.length == 0 && !MyElementProto.blockPlayer) {
+                            this.appendChild(cross.cloneNode(true));
+                            MyElementProto.changeBoardData(this.id, 'X');
+                            MyElementProto.blockPlayer = true;
+                        }
+                    });
+
+                    row.appendChild(item);
+                    delete item;
+                }
+                this.board.appendChild(row);
+            }
+        }
+
+        // Sets new value to "size" attribute
+        MyElementProto.setSize = function(val) {
+            this.Size = val;
+
+            var div = document.createElement('div');
+            div.className = "row";
+
+            var item = document.createElement('div');
+            item.className = "item";
+
+            item.appendChild(circle);
+            for (i = 0; i < this.Size; i++) {
+                div.appendChild(item.cloneNode(true));
+            }
+
+            for (i = 0; i < this.Size; i++) {
+                this.board.appendChild(div.cloneNode(true));
+            }
+        };
+
+        MyElementProto.changeBoardData = function(id, playerUnit) {
+            var start = 'row-'.length;
+            var end = '-item-'.length;
+            var middle = id.indexOf('-item-');
+            var row = id.substring(start, middle);
+            var item = id.substring(middle + end, id.length);
+            MyElementProto.boardData[row][item] = playerUnit;
+        }
+
+        // Registers <tictactoe-board> in the main document
+        window.MyElement = thatDoc.registerElement('tictactoe-board', {
+            prototype: MyElementProto
+        });
+
+    })(window, document);
+</script>

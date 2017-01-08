@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tictactoe Game</title>
+
+    <script src="tictactoe-board/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" media="screen"/>
+    <link rel="import" href="tictactoe-board/tictactoe-board.html">
+</head>
+<body>
+<style>
+    #message {
+        width: 100%;
+        text-align: left;
+        font-size: 2rem;
+    }
+
+    .container {
+        margin: 10px;
+    }
+</style>
+<div class="container">
+    <h2>Tictactoe Game from Midori</h2>
+    <div id="message">Play, you are X.</div>
+    <tictactoe-board size="3"></tictactoe-board>
+</div>
+<script>
+    var tictactoeElement = document.querySelector('tictactoe-board');
+    var elementData = JSON.stringify(tictactoeElement.boardData);
+    function play() {
+        var newData = JSON.stringify(tictactoeElement.boardData);
+        if (newData != elementData) {
+            message.innerHTML = "X Played.";
+            setTimeout(function () {
+                var response = document.getElementById('response');
+                var message = document.getElementById('message');
+                var request = new XMLHttpRequest();
+
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            var responseText = request.responseText;
+                            var responseMessage = JSON.parse(responseText).message;
+                            message.innerHTML = JSON.parse(responseText).message;
+                            if (responseMessage.indexOf('wins') != -1) {
+                                tictactoeElement.blockPlayer = true;
+                                tictactoeElement.drawBoard(JSON.parse(responseText).board, true);
+                            }
+                            else{
+                                tictactoeElement.drawBoard(JSON.parse(responseText).board, false);
+                            }
+                            elementData = JSON.stringify(JSON.parse(responseText).board);
+                        } else {
+                            response.innerHTML = 'An error occurred during your request: ' + request.status + ' ' + request.statusText;
+                        }
+                    }
+                }
+
+                request.open('POST', '/tictactoe.php');
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                request.send('board=' + newData);
+
+            }, 1000);
+        }
+    };
+    tictactoeElement.addEventListener('click', play);
+</script>
+</body>
+</html>

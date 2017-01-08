@@ -6,3 +6,5 @@ For installation, we need to consider some topics:
 Now, follow these steps:
  - Clone repository
  - composer install
+ 
+ - for testing please use phpunit.
