@@ -151,16 +151,7 @@ class Tictactoe implements MoveInterface
 
         for ($i = 0; $i <= $this->maxIndex; $i++) {
             $column = array_column($this->board, $i);
-            $columnSum = 0;
 
-            foreach ($column as $item) {
-                if ($item == $playerUnit) $columnSum++;
-
-                if ($columnSum == 1 && empty($this->nextMove)) {
-                    $coordinates = $this->findEmptyItemInColumn($this->board, $i);
-                    if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
-                }
-            }
             $rowSum = 0;
 
             foreach ($this->board[$i] as $item) {
@@ -168,6 +159,17 @@ class Tictactoe implements MoveInterface
 
                 if ($rowSum == 1 && empty($this->nextMove)) {
                     $coordinates = $this->findEmptyItemInRow($this->board, $i);
+                    if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
+                }
+            }
+
+            $columnSum = 0;
+
+            foreach ($column as $item) {
+                if ($item == $playerUnit) $columnSum++;
+
+                if ($columnSum == 1 && empty($this->nextMove)) {
+                    $coordinates = $this->findEmptyItemInColumn($this->board, $i);
                     if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
                 }
             }
