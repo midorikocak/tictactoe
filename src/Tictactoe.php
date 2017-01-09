@@ -204,7 +204,6 @@ class Tictactoe implements MoveInterface
                 if ($block && $this->board[$i][$j] == $playerUnit){
                     $coordinates = $this->getFirstEmptyNeighboor($i, $j);
                     if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
-                    break;
                 }
             }
         }
