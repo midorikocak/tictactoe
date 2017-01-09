@@ -127,6 +127,19 @@ class Tictactoe implements MoveInterface
         return false;
     }
 
+    private function getFirstEmptyNeighboor($y, $x) : array
+    {
+        $coordinateList = $this->findNeighboorKeys($this->boardSize, $y, $x);
+        foreach ($coordinateList as $coordinates) {
+            $y = $coordinates[0];
+            $x = $coordinates[1];
+            if ($this->board[$y][$x] == "") {
+                return [$y, $x];
+            }
+        }
+        return [];
+    }
+
     /**
      * Defines next move if diagonals, columns and rows have only one count
      * of the player unit or the opponent.
@@ -186,6 +199,13 @@ class Tictactoe implements MoveInterface
                 $coordinates = $this->findEmptyItemInleftDiagonal($this->board);
                 if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
             }
+
+            for($j = 0; $j <= $this->maxIndex; $j++){
+                if ($block && $this->board[$i][$j] == $playerUnit){
+                    $coordinates = $this->getFirstEmptyNeighboor($i, $j);
+                    if (!empty($coordinates)) $this->nextMove = [$coordinates[1], $coordinates[0], $player];
+                }
+            }
         }
 
         if (empty($this->nextMove) && !$block) {
@@ -236,7 +256,7 @@ class Tictactoe implements MoveInterface
 
             if ($leftDiagonalSum == $this->maxIndex) {
                 $coordinates = $this->findEmptyItemInleftDiagonal($this->board);
-                if (!empty($coordinates) && empty($this->nextMove)){
+                if (!empty($coordinates) && empty($this->nextMove)) {
                     $this->nextMove = [$coordinates[1], $coordinates[0], $player];
                 }
             }
@@ -280,7 +300,7 @@ class Tictactoe implements MoveInterface
             }
         }
 
-        if($this->message == "") $this->setMessage($player . " played.");
+        if ($this->message == "") $this->setMessage($player . " played.");
         return false;
     }
 
@@ -303,15 +323,17 @@ class Tictactoe implements MoveInterface
             $result = $this->checkWinning('X');
         }
 
-        if(!$result){
+        if (!$result) {
             $this->nextMove = [];
             $this->message = "";
+
             $result = $this->checkWinning($playerUnit);
-            if(!$result && !empty($this->nextMove)){
+
+            if (!$result && !empty($this->nextMove)) {
                 $this->board[$this->nextMove[1]][$this->nextMove[0]] = $this->nextMove[2];
                 $result = $this->checkWinning($playerUnit);
             }
-            if(empty($this->nextMove)){
+            if (empty($this->nextMove)) {
                 $this->message = "No one wins.";
             }
             return $this->nextMove;
