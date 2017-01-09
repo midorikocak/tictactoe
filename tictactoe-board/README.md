@@ -1,12 +1,10 @@
-# &lt;hello-world&gt;
+# &lt;tictactoe-board&gt;
 
 > A Web Component example using [VanillaJS](http://vanilla-js.com/).
->
-> Looking for a boilerplate? Check [element-boilerplate](https://github.com/webcomponents/element-boilerplate).
 
 ## Demo
 
-[Check it live!](http://webcomponents.github.io/hello-world-element)
+[Check it live!](https://www.mynameismidori.com/tictactoet)
 
 ## Install
 
@@ -35,14 +33,14 @@ Or [download as ZIP](https://github.com/webcomponents/hello-world-element/archiv
 3. Start using it!
 
     ```html
-    <hello-world></hello-world>
+    <tictactoe-board></tictactoe-board>
     ```
 
 ## Options
 
 Attribute  | Options                   | Default             | Description
 ---        | ---                       | ---                 | ---
-`who`      | *string*                  | `World`             | Who do you want to say hello?
+`size`      | *int*                  | `3`             | Size of desired NxN array
 
 ## Development
 
@@ -60,15 +58,11 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
     $ bower install
     ```
 
-3. Start development server and open `http://localhost:8080/components/hello-world-element/`.
+3. Start development server and open `http://localhost:8080/components/tictactoe-board-element/`.
 
     ```sh
     $ polyserve
     ```
-
-## History
-
-For detailed changelog, check [Releases](https://github.com/webcomponents/hello-world-element/releases).
 
 ## License
 
