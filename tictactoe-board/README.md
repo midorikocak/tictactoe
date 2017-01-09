@@ -66,4 +66,4 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
 
 ## License
 
-[MIT License](http://webcomponentsorg.mit-license.org/) © WebComponents.org
+[MIT License](http://webcomponentsorg.mit-license.org/) © MynameisMidori.com
