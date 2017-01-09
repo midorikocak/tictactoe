@@ -4,7 +4,7 @@
 
 ## Demo
 
-[Check it live!](https://www.mynameismidori.com/tictactoet)
+[Check it live!](https://www.mynameismidori.com/tictactoe)
 
 ## Install
 
@@ -14,7 +14,7 @@ Install the component using [Bower](http://bower.io/):
 $ bower install tictactoe-board --save
 ```
 
-Or [download as ZIP](https://github.com/webcomponents/hello-world-element/archive/master.zip).
+Or [clone](https://github.com/midorikocak/tictactoe/tictactoe-board).
 
 ## Usage
 
@@ -27,7 +27,7 @@ Or [download as ZIP](https://github.com/webcomponents/hello-world-element/archiv
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/hello-world-element/hello-world.html">
+    <link rel="import" href="bower_components/tictactoe-board-element/tictactoe-board.html">
     ```
 
 3. Start using it!
