@@ -27,7 +27,7 @@ Or [clone](https://github.com/midorikocak/tictactoe/tictactoe-board).
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/tictactoe-board-element/tictactoe-board.html">
+    <link rel="import" href="bower_components/tictactoe-board/tictactoe-board.html">
     ```
 
 3. Start using it!

@@ -1,12 +1,12 @@
 {
-    "name": "tictactoe-board-element",
+    "name": "tictactoe-board",
     "version": "1.0.1",
     "description": "Tictactoe Web Component using VanillaJS.",
     "authors": [
         "mynameismidori.com"
     ],
     "license": "MIT",
-    "main": "tictactoe-boar.html",
+    "main": "tictactoe-board.html",
     "keywords": [
         "web-components",
         "tictactoe"
